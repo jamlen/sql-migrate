@@ -10,6 +10,7 @@ import (
 	"github.com/rubenv/sql-migrate"
 	"gopkg.in/gorp.v1"
 	"gopkg.in/yaml.v1"
+    "gopkg.in/alecthomas/kingpin.v2"
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
@@ -28,6 +29,10 @@ var ConfigEnvironment string
 func ConfigFlags(f *flag.FlagSet) {
 	f.StringVar(&ConfigFile, "config", "dbconfig.yml", "Configuration file to use.")
 	f.StringVar(&ConfigEnvironment, "env", "development", "Environment to use.")
+}
+func KingpinConfigFlags() {
+   kingpin.Flag("config", "Configuration file to use.").Default("dbconfig.yml").StringVar(&ConfigFile)
+   kingpin.Flag("env", "Environment to use.").Default("development").StringVar(&ConfigEnvironment)
 }
 
 type Environment struct {
